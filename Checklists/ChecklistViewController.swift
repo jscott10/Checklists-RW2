@@ -17,7 +17,6 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     required init(coder aDecoder: NSCoder)  {
         super.init(coder: aDecoder)
 //        println(documentsDirectory())
-        
 //        loadChecklistItems()
     }
     
@@ -123,7 +122,6 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
         
         let index = find(checklist!.items, item)
         
-//        let index = checklist!.items.bridgeToObjectiveC().indexOfObject(item)
         let indexPath = NSIndexPath(forRow: index!, inSection: 0)
         if let cell = tableView.cellForRowAtIndexPath(indexPath)    {
             configureTextForCell(cell, withChecklistItem: item)

@@ -13,15 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             
     var window: UIWindow?
     
-    var dataModel: DataModel?
+    let dataModel = DataModel()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         // Override point for customization after application launch.
         
-        dataModel = DataModel()
-        
         let navigationController = window!.rootViewController as UINavigationController
         let controller = navigationController.viewControllers[0] as AllListsViewController
+        
         controller.dataModel = dataModel
         
         return true
@@ -33,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func saveData() {
-        dataModel!.saveChecklists()
+        dataModel.saveChecklists()
     }
     
     func applicationDidEnterBackground(application: UIApplication) {
