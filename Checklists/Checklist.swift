@@ -10,22 +10,24 @@ import Foundation
 
 class Checklist: NSObject, NSCoding {
     
-    var name: String
-    var items: [ChecklistItem]
-    var iconName: String
+    var name = ""
+    var items = [ChecklistItem]()
+    var iconName = ""
     
+    // "name" is required because a Checklist will always have a title
     init(name: String)  {
         self.name = name
-        self.items = [ChecklistItem]()
-        iconName = "No Icon"
     }
-    
+
+    // Part of the NSCoding protocol
     required init(coder aDecoder: NSCoder) {
-        name = aDecoder.decodeObjectForKey("Name") as NSString
+        name = aDecoder.decodeObjectForKey("Name") as String
         items = aDecoder.decodeObjectForKey("Items") as [ChecklistItem]
-        iconName = aDecoder.decodeObjectForKey("iconName") as NSString
+        iconName = aDecoder.decodeObjectForKey("iconName") as String
+        super.init()
     }
     
+    // Part of the NSCoding protocol
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(name, forKey: "Name")
         aCoder.encodeObject(items, forKey: "Items")
