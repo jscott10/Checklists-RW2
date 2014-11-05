@@ -10,42 +10,43 @@ import UIKit
 
 class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate, UINavigationControllerDelegate {
     
-    var dataModel: DataModel?
+    var dataModel: DataModel!
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return dataModel!.lists.count
+        return dataModel.lists.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let CellIdentifier = "Cell"
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier) as? UITableViewCell
+        var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(CellIdentifier) as? UITableViewCell
         
-        if cell != nil  {
-            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: CellIdentifier)
+        if cell == nil  {
+            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: CellIdentifier)
         }
         
-        var checklist: Checklist = dataModel!.lists[indexPath.row]
-        cell!.textLabel!.text = checklist.name
-        cell!.accessoryType = UITableViewCellAccessoryType.DetailDisclosureButton
+        var checklist: Checklist = dataModel.lists[indexPath.row]
+        
+        cell.textLabel.text = checklist.name
+        cell.accessoryType = UITableViewCellAccessoryType.DetailDisclosureButton
 
         let count = checklist.countUncheckedItems()
         
         if checklist.items.count == 0   {
-            cell!.detailTextLabel!.text = "(No Items)"
+            cell.detailTextLabel!.text = "(No Items)"
         }
         else if count == 0  {
-            cell!.detailTextLabel!.text = "All Done!"
+            cell.detailTextLabel!.text = "All Done!"
         }
         else    {
-            cell!.detailTextLabel!.text = "\(checklist.countUncheckedItems()) Remaining"
+            cell.detailTextLabel!.text = "\(checklist.countUncheckedItems()) Remaining"
         }
         
-        cell!.imageView!.image = UIImage(named: checklist.iconName)
+        cell.imageView.image = UIImage(named: checklist.iconName)
         
-        return cell!
+        return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)   {
