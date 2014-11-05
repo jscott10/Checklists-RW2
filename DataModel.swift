@@ -50,6 +50,7 @@ class DataModel {
     }
     
     func loadChecklists()   {
+        
         let path = dataFilePath()
 
         if NSFileManager.defaultManager().fileExistsAtPath(path)  {
@@ -75,8 +76,8 @@ class DataModel {
     // Helper functions from tutorial
     
     func documentsDirectory() -> String   {
-        let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-        return paths[0] as String
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as [String]
+        return paths[0]
     }
     
     func dataFilePath() -> String {

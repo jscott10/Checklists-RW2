@@ -13,7 +13,6 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     var dataModel: DataModel!
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Return the number of rows in the section.
         return dataModel.lists.count
     }
     
@@ -51,9 +50,9 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)   {
         
-        dataModel!.setIndexOfSelectedChecklist(indexPath.row)
+        dataModel.setIndexOfSelectedChecklist(indexPath.row)
         
-        let checklist = dataModel!.lists[indexPath.row]
+        let checklist = dataModel.lists[indexPath.row]
         performSegueWithIdentifier("ShowChecklist", sender: checklist)
     }
     
@@ -105,10 +104,10 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         
         navigationController!.delegate = self
         
-        let index = dataModel!.indexOfSelectedChecklist()
+        let index = dataModel.indexOfSelectedChecklist()
         
-        if index >= 0 && index < dataModel!.lists.count  {
-            var checklist = dataModel!.lists[index] as Checklist
+        if index >= 0 && index < dataModel.lists.count  {
+            var checklist = dataModel.lists[index] as Checklist
             performSegueWithIdentifier("ShowChecklist", sender: checklist)
         }
     }
@@ -131,14 +130,14 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
 //       let t = tableView.numberOfRowsInSection(0)
 //        let newRowIndex = dataModel!.lists.count
         
-        dataModel!.lists.append(checklist)
+        dataModel.lists.append(checklist)
         
 //        let indexPath = NSIndexPath(forRow: newRowIndex, inSection: 0)
 //        let indexPaths = [indexPath]
         
 //        tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
         
-        dataModel!.sortChecklists()
+        dataModel.sortChecklists()
         tableView.reloadData()
         
         dismissViewControllerAnimated(true, completion: nil)
@@ -151,7 +150,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
 //        let cell = tableView.cellForRowAtIndexPath(indexPath)
 //        cell.textLabel.text = checklist.name
         
-        dataModel!.sortChecklists()
+        dataModel.sortChecklists()
         tableView.reloadData()
         
         dismissViewControllerAnimated(true, completion: nil)
@@ -161,7 +160,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     func navigationController(navigationController: UINavigationController!, willShowViewController viewController: UIViewController!, animated: Bool)  {
         if viewController == self   {
             println("willShowViewController = self")
-            dataModel!.setIndexOfSelectedChecklist(-1)
+            dataModel.setIndexOfSelectedChecklist(-1)
         }
         else    {
             println("willShowViewController != self")

@@ -82,7 +82,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rGK-bN-vlP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="392" y="891"/>
+            <point key="canvasLocation" x="134" y="899"/>
         </scene>
         <!--Add Item-->
         <scene sceneID="cFj-xX-Q23">
@@ -305,7 +305,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FMA-h6-S6b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1204" y="885"/>
+            <point key="canvasLocation" x="794" y="899"/>
         </scene>
         <!--Choose Icon-->
         <scene sceneID="mhA-5H-mfJ">
@@ -339,7 +339,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tt4-j8-Ivu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1907" y="887"/>
+            <point key="canvasLocation" x="1462" y="899"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
