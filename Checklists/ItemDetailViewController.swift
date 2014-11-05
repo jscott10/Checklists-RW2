@@ -8,30 +8,41 @@
 
 import UIKit
 
+protocol ItemDetailViewControllerDelegate: class  {
+    
+    func itemDetailViewControllerDidCancel(controller: ItemDetailViewController)
+    
+    func itemDetailViewController(controller: ItemDetailViewController, didFinishAddingItem: ChecklistItem)
+    
+    func itemDetailViewController(controller: ItemDetailViewController, didFinishEditingItem: ChecklistItem)
+    
+}
+
 class ItemDetailViewController: UITableViewController, UITextFieldDelegate  {
     
-    var delegate: ItemDetailViewControllerDelegate = ChecklistViewController(coder: NSCoder())
+//    var delegate: ItemDetailViewControllerDelegate = ChecklistViewController(coder: NSCoder())
+    weak var delegate: ItemDetailViewControllerDelegate?
     
     var itemToEdit:ChecklistItem?
     
-    @IBOutlet var textField: UITextField?
+    @IBOutlet weak var textField: UITextField?
     
-    @IBOutlet var doneBarButton: UIBarButtonItem?
+    @IBOutlet weak var doneBarButton: UIBarButtonItem?
     
     @IBAction func cancel(sender: UIBarButtonItem) {
-        delegate.itemDetailViewControllerDidCancel(self)
+        delegate?.itemDetailViewControllerDidCancel(self)
     }
     
     @IBAction func done(sender: UIBarButtonItem) {
         if let item = itemToEdit    {
             item.text = textField!.text
-            delegate.itemDetailViewController(self, didFinishEditingItem: item)
+            delegate?.itemDetailViewController(self, didFinishEditingItem: item)
         }
         else    {
             let checklistItem = ChecklistItem()
             checklistItem.text = textField!.text
             checklistItem.checked = false
-            delegate.itemDetailViewController(self, didFinishAddingItem: checklistItem)
+            delegate?.itemDetailViewController(self, didFinishAddingItem: checklistItem)
         }
     }
     
@@ -69,12 +80,3 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate  {
     
 }
 
-protocol ItemDetailViewControllerDelegate  {
-    
-    func itemDetailViewControllerDidCancel(controller: ItemDetailViewController)
-    
-    func itemDetailViewController(controller: ItemDetailViewController, didFinishAddingItem: ChecklistItem)
-    
-    func itemDetailViewController(controller: ItemDetailViewController, didFinishEditingItem: ChecklistItem)
-    
-}

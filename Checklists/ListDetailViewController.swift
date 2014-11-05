@@ -6,12 +6,17 @@
 //  Copyright (c) 2014 jscott10. All rights reserved.
 //
 
-//
-//  7/16 @ 12:40 am -- left off on page 148...add view controller to storyboard!
-//
-
-
 import UIKit
+
+protocol ListDetailViewControllerDelegate: class  {
+    
+    func listDetailViewControllerDidCancel(controller: ListDetailViewController)
+    
+    func listDetailViewController(controller: ListDetailViewController, didFinishAddingChecklist checklist: Checklist)
+    
+    func listDetailViewController(controller: ListDetailViewController, didFinishEditingChecklist checklist: Checklist)
+    
+}
 
 class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     
@@ -19,15 +24,17 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
         
     @IBOutlet weak var iconImageView: UIImageView!
     
-    var delegate: ListDetailViewControllerDelegate = AllListsViewController(coder: NSCoder())
+    @IBOutlet weak var textField: UITextField?
+    
+    @IBOutlet weak var doneBarButton: UIBarButtonItem?
+    
+    //    weak var delegate: ListDetailViewControllerDelegate = AllListsViewController(coder: NSCoder())
+    
+    weak var delegate: ListDetailViewControllerDelegate?
     
     var checklistToEdit:Checklist?
     
-    var iconName:String = ""
-    
-    @IBOutlet var textField: UITextField?
-    
-    @IBOutlet var doneBarButton: UIBarButtonItem?
+    var iconName = ""
     
     convenience required init(coder aDecoder: NSCoder) {
         self.init(coder: aDecoder)
@@ -35,17 +42,17 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func cancel(sender: UIBarButtonItem) {
-        delegate.listDetailViewControllerDidCancel(self)
+        delegate?.listDetailViewControllerDidCancel(self)
     }
     
     @IBAction func done(sender: UIBarButtonItem) {
         if let checklist = checklistToEdit    {
             checklist.name = textField!.text
-            delegate.listDetailViewController(self, didFinishEditingChecklist: checklist)
+            delegate?.listDetailViewController(self, didFinishEditingChecklist: checklist)
         }
         else    {
             let checklist = Checklist(name: textField!.text)
-            delegate.listDetailViewController(self, didFinishAddingChecklist: checklist)
+            delegate?.listDetailViewController(self, didFinishAddingChecklist: checklist)
         }
     }
     
@@ -86,15 +93,5 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
     }
 
-}
-
-protocol ListDetailViewControllerDelegate  {
-    
-    func listDetailViewControllerDidCancel(controller: ListDetailViewController)
-    
-    func listDetailViewController(controller: ListDetailViewController, didFinishAddingChecklist checklist: Checklist)
-    
-    func listDetailViewController(controller: ListDetailViewController, didFinishEditingChecklist checklist: Checklist)
-    
 }
 
