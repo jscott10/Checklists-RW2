@@ -24,22 +24,21 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
         
     @IBOutlet weak var iconImageView: UIImageView!
     
-    @IBOutlet weak var textField: UITextField?
+    @IBOutlet weak var textField: UITextField!
     
-    @IBOutlet weak var doneBarButton: UIBarButtonItem?
+    @IBOutlet weak var doneBarButton: UIBarButtonItem!
     
-    //    weak var delegate: ListDetailViewControllerDelegate = AllListsViewController(coder: NSCoder())
-    
+    //    weak var delegate: ListDetailViewControllerDelegate = AllListsViewController(coder: NSCoder())    
     weak var delegate: ListDetailViewControllerDelegate?
     
     var checklistToEdit:Checklist?
     
     var iconName = ""
     
-    convenience required init(coder aDecoder: NSCoder) {
-        self.init(coder: aDecoder)
-        iconName = "Folder"
-    }
+//    convenience required init(coder aDecoder: NSCoder) {
+//       self.init(coder: aDecoder)
+//        iconName = "Folder"
+//    }
     
     @IBAction func cancel(sender: UIBarButtonItem) {
         delegate?.listDetailViewControllerDidCancel(self)
@@ -65,13 +64,15 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-    func textField(theTextField: UITextField, shouldChangeCharactersInRange range: Range<String.Index>, replacementString string: String) -> Bool {
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
+        replacementString string: String) -> Bool {
     
-        var newText = theTextField.text.stringByReplacingCharactersInRange(range, withString: string)
+            let oldText: NSString = textField.text
+            let newText: NSString = oldText.stringByReplacingCharactersInRange(range, withString: string)
         
-        doneBarButton!.enabled = countElements(newText) > 0
-        
-        return true
+            doneBarButton.enabled = (newText.length > 0)
+            
+            return true
     }
     
     override func viewDidLoad() {
